@@ -15,14 +15,15 @@ class App extends Component {
         this.setState({ errorMessage: error.message })
       }
     );
-  };
+  }
+
 
   render() {
     if (this.state.errorMessage && !this.state.latitude){
       return <div>Error: {this.state.errorMessage}</div>;
     }
     if(!this.state.errorMessage && this.state.latitude){
-      return <div>Latitude: {this.state.latitude}</div>;
+      return <SeasonDisplay latitude={this.state.latitude}/>
     }
     return <div>Loading...</div>;
   }
