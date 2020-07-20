@@ -4,13 +4,27 @@ import SeasonDisplay from './SeasonDisplay';
 
 class App extends Component {
 
-  
-  render() {
-    return(
-      <div>
-        <SeasonDisplay />
-      </div>
+  state = { latitude: null, errorMessage: ''}
+
+  componentDidMount(){
+    window.navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({ latitude: position.coords.latitude })
+      },
+      error => {
+        this.setState({ errorMessage: error.message })
+      }
     );
+  };
+
+  render() {
+    if (this.state.errorMessage && !this.state.latitude){
+      return <div>Error: {this.state.errorMessage}</div>;
+    }
+    if(!this.state.errorMessage && this.state.latitude){
+      return <div>Latitude: {this.state.latitude}</div>;
+    }
+    return <div>Loading...</div>;
   }
 };
 
