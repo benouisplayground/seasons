@@ -12,15 +12,33 @@ const getSeason = (lattitude, month) => {
   } else {
     return lattitude > 0 ? 'spring' : 'autumn';
   }
-}
+};
+
+const seasonConfig = {
+  summer: {
+    text: "Let's hit the beach!",
+    iconName: "wb_sunny"},
+  winter : {
+    text: "Burr, It's chill",
+    iconName: "ac_unit"},
+  spring :{
+    text: "Spring is in the air",
+    iconName: "local_florist"},
+  autumn : {
+    text: "Never fear, autumn is here",
+    iconName: "nature"}
+};
 
 const  SeasonDisplay = (props) => {
 
   const season = getSeason(props.latitude, new Date().getMonth());
+  const { text, iconName } = seasonConfig[season];
 
   return(
     <div>
-      {season}
+      <i className="material-icons" >{iconName}</i>
+      <h1 >{text}</h1>
+      <i className="material-icons" >{iconName}</i>
     </div>
   );
 }
